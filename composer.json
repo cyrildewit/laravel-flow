@@ -1,0 +1,61 @@
+{
+    "name": "cyrildewit/laravel-flow",
+    "description": "Bring the power of flows (wizards) to your Laravel application",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/cyrildewit/laravel-flow",
+    "keywords": [
+        "laravel",
+        "flow",
+        "wizard",
+        "multi-page",
+        "forms",
+        "multistep"
+    ],
+    "support": {
+        "email": "github@cyrildewit.nl",
+        "issues": "https://github.com/cyrildewit/laravel-flow/issues",
+        "wiki": "https://github.com/cyrildewit/laravel-flow/wiki",
+        "source": "https://github.com/cyrildewit/laravel-flow",
+        "docs": "https://github.com/cyrildewit/laravel-flow"
+    },
+    "authors": [
+        {
+            "name": "Cyril de Wit",
+            "email": "info@cyrildewit.nl",
+            "homepage": "http://cyrildewit.nl",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0",
+        "phpunit/phpunit": "^6.5|^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CyrildeWit\\LaravelFlow\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CyrildeWit\\LaravelFlow\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CyrildeWit\\LaravelFlow\\LaravelFlowServiceProvider"
+            ]
+        }
+    }
+}

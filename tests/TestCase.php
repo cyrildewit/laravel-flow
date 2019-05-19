@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Eloquent Viewable package.
+ * This file is part of the Laravel Flow package.
  *
  * (c) Cyril de Wit <github@cyrildewit.nl>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace CyrildeWit\EloquentViewable\Tests;
+namespace CyrildeWit\LaravelFlow\Tests;
 
 use Illuminate\Support\Facades\File;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -27,7 +27,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            \CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
+            \CyrildeWit\LaravelFlow\LaravelFlowServiceProvider::class,
         ];
     }
 }

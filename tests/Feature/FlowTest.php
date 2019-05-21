@@ -197,4 +197,16 @@ class FlowTest extends TestCase
             $flow->getOrderedStages()
         );
     }
+
+    /** @test */
+    public function it_throws_an_exception_when_removing_a_stage_that_does_not_exists()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', $accountInformation = new AccountInformation());
+        $flow->addStage('personal-information', $personalInformation = new PersonalInformation());
+
+        $this->expectException(StageDoesNotExists::class);
+
+        $flow->removeStage('confirm-details');
+    }
 }

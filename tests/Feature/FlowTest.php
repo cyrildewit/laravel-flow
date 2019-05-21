@@ -16,6 +16,8 @@ namespace CyrildeWit\LaravelFlow\Tests\Feature;
 use CyrildeWit\LaravelFlow\Flow;
 use CyrildeWit\LaravelFlow\Tests\TestCase;
 use CyrildeWit\LaravelFlow\Stage\AbstractStage;
+use CyrildeWit\LaravelFlow\Exceptions\StageDoesNotExists;
+use CyrildeWit\LaravelFlow\Exceptions\StageAlreadyExists;
 use CyrildeWit\LaravelFlow\Tests\Support\TestStages\ConfirmDetails;
 use CyrildeWit\LaravelFlow\Tests\Support\TestStages\PaymentInformation;
 use CyrildeWit\LaravelFlow\Tests\Support\TestStages\AccountInformation;
@@ -114,5 +116,85 @@ class FlowTest extends TestCase
         $flow->addStage('confirm-details', $confirmDetails = new ConfirmDetails());
 
         $this->assertEquals($paymentInformation, $flow->getStageByIndex(2));
+    }
+
+    /** @test */
+    public function it_throws_an_exception_when_a_stage_by_the_given_index_does_not_exists()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', $accountInformation = new AccountInformation());
+        $flow->addStage('personal-information', $personalInformation = new PersonalInformation());
+
+        $this->assertEquals($accountInformation, $flow->getStageByIndex(0));
+
+        $this->expectException(StageDoesNotExists::class);
+
+        $flow->getStageByIndex(5);
+    }
+
+    /** @test */
+    public function it_can_get_the_first_stage()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', $accountInformation = new AccountInformation());
+        $flow->addStage('personal-information', $personalInformation = new PersonalInformation());
+        $flow->addStage('confirm-details', $confirmDetails = new ConfirmDetails());
+
+        $this->assertEquals($accountInformation, $flow->getFirstStage());
+    }
+
+    /** @test */
+    public function it_can_get_the_last_stage()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', $accountInformation = new AccountInformation());
+        $flow->addStage('personal-information', $personalInformation = new PersonalInformation());
+        $flow->addStage('confirm-details', $confirmDetails = new ConfirmDetails());
+
+        $this->assertEquals($confirmDetails, $flow->getLastStage());
+    }
+
+    /** @test */
+    public function it_throws_an_exception_when_a_stage_with_the_same_name_already_exists()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', $accountInformation = new AccountInformation());
+        $flow->addStage('personal-information', $personalInformation = new PersonalInformation());
+        $flow->addStage('confirm-details', $confirmDetails = new ConfirmDetails());
+
+        $this->expectException(StageAlreadyExists::class);
+
+        $flow->addStage('confirm-details', $confirmDetails = new ConfirmDetails());
+    }
+
+    /** @test */
+    public function it_can_remove_a_stage_by_name()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', $accountInformation = new AccountInformation());
+        $flow->addStage('personal-information', $personalInformation = new PersonalInformation());
+        $flow->addStage('payment-information', $paymentInformation = new PaymentInformation());
+        $flow->addStage('confirm-details', $confirmDetails = new ConfirmDetails());
+
+        $this->assertEquals(
+            [
+                0 => $accountInformation,
+                1 => $personalInformation,
+                2 => $paymentInformation,
+                3 => $confirmDetails,
+            ],
+            $flow->getOrderedStages()
+        );
+
+        $flow->removeStage('payment-information');
+
+        $this->assertEquals(
+            [
+                0 => $accountInformation,
+                1 => $personalInformation,
+                2 => $confirmDetails,
+            ],
+            $flow->getOrderedStages()
+        );
     }
 }

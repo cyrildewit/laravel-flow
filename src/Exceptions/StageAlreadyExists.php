@@ -15,15 +15,10 @@ namespace CyrildeWit\LaravelFlow\Exceptions;
 
 use InvalidArgumentException;
 
-class StageDoesNotExists extends InvalidArgumentException
+class StageAlreadyExists extends InvalidArgumentException
 {
     public static function named(string $stageName)
     {
-        return new static("There is no stage with name `{$stageName}`.");
-    }
-
-    public static function withIndex(int $stageIndex)
-    {
-        return new static("There is no stage with index `{$stageIndex}`.");
+        return new static("Stage with name `{$stageName}` already exists.");
     }
 }

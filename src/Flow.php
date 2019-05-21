@@ -15,6 +15,7 @@ namespace CyrildeWit\LaravelFlow;
 
 use CyrildeWit\LaravelFlow\Stage\StageInterface;
 use CyrildeWit\LaravelFlow\Exceptions\StageDoesNotExists;
+use CyrildeWit\LaravelFlow\Exceptions\StageAlreadyExists;
 
 class Flow implements FlowInterface
 {
@@ -120,7 +121,7 @@ class Flow implements FlowInterface
     public function addStage(string $name, StageInterface $stage)
     {
         if ($this->hasStage($name)) {
-            throw new InvalidArgumentException(sprintf('Stage with name "%s" already exists', $name));
+            throw StageAlreadyExists::named($name);
         }
 
         // if (null === $stage->getName()) {
@@ -135,8 +136,8 @@ class Flow implements FlowInterface
      */
     public function removeStage(string $name)
     {
-        if (! $this->hasStage($name)) {
-            throw new InvalidArgumentException(sprintf('Stage with name "%s" does not exist', $name));
+        if(! $this->hasStage($name)) {
+            throw StageDoesNotExists::named($name);
         }
 
         $index = array_search($this->stages[$name], $this->orderedStages);

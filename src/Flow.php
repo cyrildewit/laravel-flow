@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CyrildeWit\LaravelFlow;
 
 use CyrildeWit\LaravelFlow\Stage\StageInterface;
+use CyrildeWit\LaravelFlow\Exceptions\StageDoesNotExists;
 
 class Flow implements FlowInterface
 {
@@ -82,12 +83,19 @@ class Flow implements FlowInterface
      */
     public function getStageByIndex(int $index)
     {
-        if(! $this->hasStageByIndex()) {
-            // StageNotFoundException
-            throw new InvalidArgumentException(sprintf('Stage with index %d. does not exist', $index));
+        if(! $this->hasStageByIndex($index)) {
+            throw StageDoesNotExists::withIndex($index);
         }
 
         return $this->orderedStages[$index];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasStageByIndex(int $index)
+    {
+        return isset($this->orderedStages[$index]);
     }
 
     /**

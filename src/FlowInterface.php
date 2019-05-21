@@ -20,14 +20,14 @@ interface FlowInterface
     /**
      * Get the stages.
      *
-     * @return StageInterface[]
+     * @return \CyrildeWit\LaravelFlow\Stage\StageInterface[]
      */
     public function getStages();
 
     /**
      * Set the stages.
      *
-     * @param StageInterface[]  $stages
+     * @param \CyrildeWit\LaravelFlow\Stage\StageInterface[]  $stages
      */
     public function setStages(array $stages);
 
@@ -49,7 +49,7 @@ interface FlowInterface
     /**
      * Get stages ordered.
      *
-     * @return StageInterface[]
+     * @return \CyrildeWit\LaravelFlow\Stage\StageInterface[]
      */
     public function getOrderedStages();
 
@@ -57,21 +57,29 @@ interface FlowInterface
      * Get stage by index.
      *
      * @param  int  $index
-     * @return
+     * @return \CyrildeWit\LaravelFlow\Stage\StageInterface
      */
     public function getStageByIndex(int $index);
 
     /**
+     * Determine if stage by index exists in the flow.
+     *
+     * @param  int  $index
+     * @return boolean
+     */
+    public function hasStageByIndex(int $index);
+
+    /**
      * Get first process stage.
      *
-     * @return StageInterface
+     * @return \CyrildeWit\LaravelFlow\Stage\StageInterface
      */
     public function getFirstStage();
 
     /**
      * Get last stage.
      *
-     * @return StageInterface
+     * @return \CyrildeWit\LaravelFlow\Stage\StageInterface
      */
     public function getLastStage();
 
@@ -79,7 +87,7 @@ interface FlowInterface
      * Add stage with name.
      *
      * @param string  $name
-     * @param StageInterface  $stage
+     * @param \CyrildeWit\LaravelFlow\Stage\StageInterface  $stage
      */
     public function addStage(string $name, StageInterface $stage);
 

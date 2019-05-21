@@ -103,4 +103,16 @@ class FlowTest extends TestCase
             $flow->getOrderedStages()
         );
     }
+
+    /** @test */
+    public function it_can_get_a_stage_by_index()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', $accountInformation = new AccountInformation());
+        $flow->addStage('personal-information', $personalInformation = new PersonalInformation());
+        $flow->addStage('payment-information', $paymentInformation = new PaymentInformation());
+        $flow->addStage('confirm-details', $confirmDetails = new ConfirmDetails());
+
+        $this->assertEquals($paymentInformation, $flow->getStageByIndex(2));
+    }
 }

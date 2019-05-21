@@ -24,25 +24,6 @@ use CyrildeWit\LaravelFlow\Tests\Support\TestStages\PersonalInformation;
 class FlowTest extends TestCase
 {
     /** @test */
-    public function it_can_determine_if_a_stage_exists_by_name()
-    {
-        $flow = new Flow();
-        $flow->addStage('account-information', new AccountInformation());
-
-        $this->assertTrue($flow->hasStage('account-information'));
-    }
-
-    /** @test */
-    public function it_can_count_the_stages()
-    {
-        $flow = new Flow();
-        $flow->addStage('account-information', new AccountInformation());
-        $flow->addStage('personal-information', new PersonalInformation());
-
-        $this->assertEquals(2, $flow->countStages());
-    }
-
-    /** @test */
     public function it_can_return_the_stages()
     {
         $flow = new Flow();
@@ -60,6 +41,47 @@ class FlowTest extends TestCase
             ],
             $flow->getStages()
         );
+    }
+
+    /** @test */
+    public function it_can_set_the_stages()
+    {
+        $flow = new Flow();
+        $flow->setStages([
+            'account-information' => $accountInformation = new AccountInformation(),
+            'personal-information' => $personalInformation = new PersonalInformation(),
+            'payment-information' => $paymentInformation = new PaymentInformation(),
+            'confirm-details' => $confirmDetails = new ConfirmDetails(),
+        ]);
+
+        $this->assertEquals(
+            [
+                'account-information' => $accountInformation,
+                'personal-information' => $personalInformation,
+                'payment-information' => $paymentInformation,
+                'confirm-details' => $confirmDetails,
+            ],
+            $flow->getStages()
+        );
+    }
+
+    /** @test */
+    public function it_can_determine_if_a_stage_exists_by_name()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', new AccountInformation());
+
+        $this->assertTrue($flow->hasStage('account-information'));
+    }
+
+    /** @test */
+    public function it_can_count_the_stages()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', new AccountInformation());
+        $flow->addStage('personal-information', new PersonalInformation());
+
+        $this->assertEquals(2, $flow->countStages());
     }
 
     /** @test */

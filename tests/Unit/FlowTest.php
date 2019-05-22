@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace CyrildeWit\LaravelFlow\Tests\Feature;
+namespace CyrildeWit\LaravelFlow\Tests\Unit;
 
 use CyrildeWit\LaravelFlow\Flow;
 use CyrildeWit\LaravelFlow\Tests\TestCase;

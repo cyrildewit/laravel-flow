@@ -159,6 +159,47 @@ class FlowTest extends TestCase
     }
 
     /** @test */
+    public function it_can_determine_if_a_stage_exists_by_index()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', new AccountInformation());
+
+        $this->assertTrue($flow->hasStageByIndex(0));
+    }
+
+    /** @test */
+    public function it_can_get_a_stage_by_slug()
+    {
+        $flow = new Flow();
+
+        $personalInformation = new PersonalInformation();
+        $personalInformation->setSlug('personal-information-slug');
+
+        $flow->addStage('account-information', $accountInformation = new AccountInformation());
+        $flow->addStage('personal-information', $personalInformation);
+
+        $this->assertEquals($personalInformation, $flow->getStageBySlug('personal-information-slug'));
+    }
+
+    /** @test */
+    public function it_throws_an_exception_when_getting_a_stage_by_non_existing_slug()
+    {
+        $flow = new Flow();
+
+        $accountInformation = new AccountInformation();
+        $accountInformation->setSlug('account-information-slug');
+
+        $flow->addStage('account-information', $accountInformation);
+        $flow->addStage('personal-information', $personalInformation = new PersonalInformation());
+
+        $this->assertEquals($accountInformation, $flow->getStageBySlug('account-information-slug'));
+
+        $this->expectException(StageDoesNotExists::class);
+
+        $flow->getStageByIndex(5);
+    }
+
+    /** @test */
     public function it_can_get_the_first_stage()
     {
         $flow = new Flow();

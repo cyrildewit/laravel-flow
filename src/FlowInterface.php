@@ -78,6 +78,14 @@ interface FlowInterface
     public function hasStageByIndex(int $index);
 
     /**
+     * Get stage by slug.
+     *
+     * @param  int  $index
+     * @return \CyrildeWit\LaravelFlow\Stage\StageInterface
+     */
+    public function getStageBySlug(string $slug);
+
+    /**
      * Get first process stage.
      *
      * @return \CyrildeWit\LaravelFlow\Stage\StageInterface

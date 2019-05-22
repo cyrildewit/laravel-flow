@@ -26,4 +26,9 @@ class StageDoesNotExists extends InvalidArgumentException
     {
         return new static("There is no stage with index `{$stageIndex}`.");
     }
+
+    public static function withSlug(string $stageSlug)
+    {
+        return new static("There is no stage with slug `{$stageSlug}`.");
+    }
 }

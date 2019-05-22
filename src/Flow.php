@@ -114,6 +114,20 @@ class Flow implements FlowInterface
     /**
      * {@inheritdoc}
      */
+    public function getStageBySlug(string $slug)
+    {
+        foreach($this->getStages() as $stage) {
+            if ($slug === $stage->getSlug()) {
+                return $stage;
+            }
+        }
+
+        throw StageDoesNotExists::withSlug($slug);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getFirstStage()
     {
         return $this->getStageByIndex(0);

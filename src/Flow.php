@@ -58,17 +58,29 @@ class Flow implements FlowInterface
     /**
      * {@inheritdoc}
      */
-    public function hasStage(string $name)
+    public function countStages()
     {
-        return isset($this->stages[$name]);
+        return count($this->stages);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function countStages()
+    public function getStage(string $name)
     {
-        return count($this->stages);
+        if(! $this->hasStage($name)) {
+            throw StageDoesNotExists::named($name);
+        }
+
+        return $this->stages[$name];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasStage(string $name)
+    {
+        return isset($this->stages[$name]);
     }
 
     /**

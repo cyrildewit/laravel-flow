@@ -68,6 +68,16 @@ class FlowTest extends TestCase
     }
 
     /** @test */
+    public function it_can_count_the_stages()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', new AccountInformation());
+        $flow->addStage('personal-information', new PersonalInformation());
+
+        $this->assertEquals(2, $flow->countStages());
+    }
+
+    /** @test */
     public function it_can_determine_if_a_stage_exists_by_name()
     {
         $flow = new Flow();
@@ -77,13 +87,15 @@ class FlowTest extends TestCase
     }
 
     /** @test */
-    public function it_can_count_the_stages()
+    public function it_can_get_a_stage_by_name()
     {
         $flow = new Flow();
-        $flow->addStage('account-information', new AccountInformation());
-        $flow->addStage('personal-information', new PersonalInformation());
+        $flow->addStage('account-information', $accountInformation = new AccountInformation());
+        $flow->addStage('personal-information', $personalInformation = new PersonalInformation());
+        $flow->addStage('payment-information', $paymentInformation = new PaymentInformation());
+        $flow->addStage('confirm-details', $confirmDetails = new ConfirmDetails());
 
-        $this->assertEquals(2, $flow->countStages());
+        $this->assertEquals($paymentInformation, $flow->getStage('payment-information'));
     }
 
     /** @test */

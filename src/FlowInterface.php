@@ -32,19 +32,27 @@ interface FlowInterface
     public function setStages(array $stages);
 
     /**
+     * Count all the stages.
+     *
+     * @return int
+     */
+    public function countStages();
+
+    /**
+     * Get stage by name.
+     *
+     * @param  string  $name
+     * @return \CyrildeWit\LaravelFlow\Stage\StageInterface
+     */
+    public function getStage(string $name);
+
+    /**
      * Determine if stage by name exists in the flow.
      *
      * @param  string  $name
      * @return boolean
      */
     public function hasStage(string $name);
-
-    /**
-     * Count all the stages.
-     *
-     * @return int
-     */
-    public function countStages();
 
     /**
      * Get stages ordered.

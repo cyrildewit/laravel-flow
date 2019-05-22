@@ -58,4 +58,11 @@ interface StageInterface
      * @return mixed
      */
     public function process();
+
+    /**
+     * Determine if stage is active.
+     *
+     * @return bool
+     */
+    public function isActive();
 }

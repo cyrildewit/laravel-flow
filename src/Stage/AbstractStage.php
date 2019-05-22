@@ -30,6 +30,13 @@ abstract class AbstractStage implements StageInterface
     protected $slug;
 
     /**
+     * Activeness of stage.
+     *
+     * @var bool
+     */
+    protected $active = true;
+
+    /**
      * {@inheritdoc}
      */
     public function getName()
@@ -70,4 +77,12 @@ abstract class AbstractStage implements StageInterface
      * {@inheritdoc}
      */
     abstract public function process();
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
 }

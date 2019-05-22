@@ -196,7 +196,7 @@ class FlowTest extends TestCase
 
         $this->expectException(StageDoesNotExists::class);
 
-        $flow->getStageByIndex(5);
+        $flow->getStageBySlug('non-existing-slug');
     }
 
     /** @test */

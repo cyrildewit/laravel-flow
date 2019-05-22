@@ -99,6 +99,20 @@ class FlowTest extends TestCase
     }
 
     /** @test */
+    public function it_throws_an_exception_when_getting_a_stage_by_non_existing_name()
+    {
+        $flow = new Flow();
+        $flow->addStage('account-information', $accountInformation = new AccountInformation());
+        $flow->addStage('personal-information', $personalInformation = new PersonalInformation());
+
+        $this->assertEquals($accountInformation, $flow->getStage('account-information'));
+
+        $this->expectException(StageDoesNotExists::class);
+
+        $flow->getStage('non-existing-name');
+    }
+
+    /** @test */
     public function it_can_return_the_ordered_stages()
     {
         $flow = new Flow();
@@ -131,7 +145,7 @@ class FlowTest extends TestCase
     }
 
     /** @test */
-    public function it_throws_an_exception_when_a_stage_by_the_given_index_does_not_exists()
+    public function it_throws_an_exception_when_getting_a_stage_by_non_existing_index()
     {
         $flow = new Flow();
         $flow->addStage('account-information', $accountInformation = new AccountInformation());

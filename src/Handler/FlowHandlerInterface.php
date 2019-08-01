@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace CyrildeWit\LaravelFlow\Handler;
 
+use Illuminate\Http\Request;
 use CyrildeWit\LaravelFlow\Stage\StageInterface;
 
 interface FlowHandlerInterface
@@ -23,10 +24,10 @@ interface FlowHandlerInterface
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function display(Request $request, string $slug = nul);
+    public function display(Request $request, string $slug = null);
 
     /**
      * Process the flows's stage.
      */
-    public function process();
+    public function process(Request $request, string $slug = null);
 }

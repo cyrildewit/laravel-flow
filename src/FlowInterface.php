@@ -55,13 +55,6 @@ interface FlowInterface
     public function hasStage(string $name);
 
     /**
-     * Get stages ordered.
-     *
-     * @return \CyrildeWit\LaravelFlow\Stage\StageInterface[]
-     */
-    public function getOrderedStages();
-
-    /**
      * Get stage by index.
      *
      * @param  int  $index
@@ -108,9 +101,27 @@ interface FlowInterface
     public function addStage(string $name, StageInterface $stage);
 
     /**
-     * Remove stage.
+     * Remove stage by name.
      *
      * @param string $name
      */
     public function removeStage(string $name);
+
+    // public function isCompleted();
+
+    // public function isValidTill();
+
+    // public function getLastValid();
+
+    // public function getFirstInvalid();
+
+    // public function getPrevious();
+
+    // public function getNext();
+
+    // public function save();
+
+    // public function clear();
+
+    // public function firstOrLastProcessed();
 }

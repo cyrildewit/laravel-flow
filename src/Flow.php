@@ -20,13 +20,13 @@ use CyrildeWit\LaravelFlow\Exceptions\StageAlreadyExists;
 class Flow implements FlowInterface
 {
     /**
-     * Collection of stages.
+     * List of stages that are part of the flow.
      *
-     * Structure: ['name' => StageInterface]
+     * Structure: [index => StageInterface]
      *
      * @var \CyrildeWit\LaravelFlow\StageInterface[]
      */
-    protected $stages;
+    protected $stages = [];
 
     /**
      * Ordered collection of stages.

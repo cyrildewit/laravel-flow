@@ -38,13 +38,25 @@ trait HandlesFlow
             return $this->sendStageDoesNotExistsResponse($request);
         }
 
-        return $stage->display();
+        return $stage->display($request);
     }
 
     /**
      * Process the flows's stage.
      */
-    public function process() {}
+    public function process(Request $request, string $slug = null) {
+        try {
+            if (null === $slug) {
+                $stage = $this->flow()->firstOrLastProcessed();
+            } else {
+                $stage = $this->flow()->getStageBySlug($slug);
+            }
+        } catch (StageDoesNotExists $e) {
+            return $this->sendStageDoesNotExistsResponse($request);
+        }
+
+        return $stage->process($request);
+    }
 
     /**
      * Get the s

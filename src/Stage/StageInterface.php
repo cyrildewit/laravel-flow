@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace CyrildeWit\LaravelFlow\Stage;
 
+use Illuminate\Http\Request;
+
 interface StageInterface
 {
     /**
@@ -49,7 +51,7 @@ interface StageInterface
      * @param  \CyrildeWit\LaravelFlow\Context\FlowContextInterface  $context
      * @return mixed
      */
-    public function display();
+    public function display(Request $request);
 
     /**
      * Display stage.
@@ -57,12 +59,19 @@ interface StageInterface
      * @param  \CyrildeWit\LaravelFlow\Context\FlowContextInterface  $context
      * @return mixed
      */
-    public function process();
+    public function process(Request $request);
 
     /**
-     * Determine if stage is active.
+     * Determine if the stage is active.
      *
      * @return bool
      */
     public function isActive();
+
+    /**
+     * Determine if the stage is valid.
+     *
+     * @return bool
+     */
+    public function isValid(Request $request);
 }

@@ -2,6 +2,7 @@
 
 namespace CyrildeWit\LaravelFlow\Tests\Support\TestStages;
 
+use Illuminate\Http\Request;
 use CyrildeWit\LaravelFlow\Stage\AbstractStage;
 
 class ConfirmDetails extends AbstractStage
@@ -11,15 +12,20 @@ class ConfirmDetails extends AbstractStage
      *
      * @return \Illuminate\Http\Response
      */
-    public function display() {
+    public function display(Request $request) {
         //
     }
 
     /**
      *
      */
-    public function process()
+    public function process(Request $request)
     {
         //
+    }
+
+    public function isValid(Request $request)
+    {
+        return false;
     }
 }

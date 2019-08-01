@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace CyrildeWit\LaravelFlow\Stage;
 
+use Illuminate\Http\Request;
+
 abstract class AbstractStage implements StageInterface
 {
     /**
@@ -71,12 +73,12 @@ abstract class AbstractStage implements StageInterface
     /**
      * {@inheritdoc}
      */
-    abstract public function display();
+    abstract public function display(Request $request);
 
     /**
      * {@inheritdoc}
      */
-    abstract public function process();
+    abstract public function process(Request $request);
 
     /**
      * {@inheritdoc}
@@ -85,4 +87,9 @@ abstract class AbstractStage implements StageInterface
     {
         return $this->active;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function isValid(Request $request);
 }

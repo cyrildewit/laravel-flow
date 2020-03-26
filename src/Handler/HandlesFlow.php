@@ -29,8 +29,10 @@ trait HandlesFlow
     public function display(Request $request, string $slug = null)
     {
         try {
-            if (null === $slug) {
+            if ($slug === null) {
                 $stage = $this->flow()->firstOrLastProcessed();
+
+                return redirect()->route('user-onboarding', $stage->getSlug());
             } else {
                 $stage = $this->flow()->getStageBySlug($slug);
             }

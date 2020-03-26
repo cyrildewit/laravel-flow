@@ -170,4 +170,9 @@ class Flow implements FlowInterface
         unset($this->stages[$name], $this->orderedStages[$index]);
         $this->orderedStages = array_values($this->orderedStages); //keep sequential index intact
     }
+
+    public function firstOrLastProcessed()
+    {
+        return $this->getFirstStage();
+    }
 }

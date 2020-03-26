@@ -123,5 +123,5 @@ interface FlowInterface
 
     // public function clear();
 
-    // public function firstOrLastProcessed();
+    public function firstOrLastProcessed();
 }
